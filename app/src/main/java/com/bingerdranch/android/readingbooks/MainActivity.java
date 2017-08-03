@@ -25,8 +25,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         //readBook();
         listInList = new ArrayList<>();
-        write(textOnFile);
         doInBackground();
+        write();
 
     }
 
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
-    public void write(String textOnFile) {
+    public void write() {
 
         final String LOG_TAG = "MyLogs";
         final String FILE_NAME = "content.txt";
