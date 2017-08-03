@@ -17,13 +17,17 @@ public class MainActivity extends Activity {
 
 
     String textOnFile;
-    ListView listViewBooks;
+    ArrayList <ArrayList<String>> listInList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        readBook();
+        //readBook();
+        listInList = new ArrayList<>();
+        write(textOnFile);
+        doInBackground();
+
     }
 
     void readBook(){
@@ -39,9 +43,6 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        write(textOnFile);
-
     }
     public void write(String textOnFile) {
 
@@ -49,17 +50,18 @@ public class MainActivity extends Activity {
         final String FILE_NAME = "content.txt";
         FileOutputStream fos = null;
         Log.d(LOG_TAG, "Метод сработал");
+        Log.d(LOG_TAG, "listSize = " + listInList.size());
         try {
-            /*for (int i = 0; i<listInList.size();i++){
+            for (int i = 0; i<listInList.size();i++){
                 for(int j = 0; j<listInList.get(i).size();j++){
                     String text = listInList.get(i).get(j);
                     fos = openFileOutput(FILE_NAME, MODE_APPEND);
                     fos.write(text.getBytes());
                 }
-            }*/
-            fos = openFileOutput(FILE_NAME, MODE_APPEND);
+            }
+            /*fos = openFileOutput(FILE_NAME, MODE_APPEND);
             fos.write(textOnFile.getBytes());
-            Log.d(LOG_TAG, "Save");
+            Log.d(LOG_TAG, "Save");*/
         }
         catch(IOException ex) {
             Log.d(LOG_TAG, "Error");
@@ -73,9 +75,11 @@ public class MainActivity extends Activity {
                 Log.d(LOG_TAG, "Error 2");
             }
         }
+
+
+
     }
-    ArrayList <ArrayList<String>> listInList;
-    Context baseContext;
+
 
 
     private static final String LOG_TAG = "MyLogs";
@@ -85,7 +89,7 @@ public class MainActivity extends Activity {
         String textOnFile;
         String arabTexts;
 
-        Resources res = baseContext.getResources();
+        Resources res = getResources();
         InputStream in_s = null;
         InputStream in_arab = null;
 
